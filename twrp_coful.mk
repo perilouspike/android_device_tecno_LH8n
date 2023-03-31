@@ -22,7 +22,7 @@ $(call inherit-product, device/motorola/coful/device.mk)
 
 # Inherit some common TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
-$(call inherit-product, vendor/twrp/config/gsm.mk)
+$(call inherit-product-if-exists, vendor/twrp/config/gsm.mk)
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
