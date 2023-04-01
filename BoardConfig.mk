@@ -172,7 +172,7 @@ TW_NO_SCREEN_BLANK := true
 TARGET_USES_MKE2FS := true # Use mke2fs to create ext4 images
 TW_HAS_MTP := true
 TW_INCLUDE_NTFS_3G := true
-TW_USE_TOOLBOX := true
+#TW_USE_TOOLBOX := true
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
@@ -188,10 +188,10 @@ TW_EXCLUDE_TWRP_APP := true
 TW_EXCLUDE_APEX := true
 
 # Include some binaries
-TW_INCLUDE_LIBRESETPROP := true
-TW_INCLUDE_REPACKTOOLS := true
-TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_BASH := true
+#TW_INCLUDE_LIBRESETPROP := true
+#TW_INCLUDE_REPACKTOOLS := true
+#TW_INCLUDE_RESETPROP := true
+#TW_INCLUDE_BASH := true
 
 # Maintainer/Version
 TW_DEVICE_VERSION := perilouspike
