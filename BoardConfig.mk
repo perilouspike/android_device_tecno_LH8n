@@ -169,10 +169,11 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 #TW_SCREEN_BLANK_ON_BOOT := true
 TW_NO_SCREEN_BLANK := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TARGET_USES_MKE2FS := true # Use mke2fs to create ext4 images
-TW_HAS_MTP := true
-TW_INCLUDE_NTFS_3G := true
+#TARGET_USES_MKE2FS := true # Use mke2fs to create ext4 images
+#TW_HAS_MTP := true
+#TW_INCLUDE_NTFS_3G := true
 #TW_USE_TOOLBOX := true
+LZMA_RAMDISK_TARGETS := boot,recovery
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
