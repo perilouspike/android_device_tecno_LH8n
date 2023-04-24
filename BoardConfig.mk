@@ -173,7 +173,7 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 #TW_HAS_MTP := true
 #TW_INCLUDE_NTFS_3G := true
 #TW_USE_TOOLBOX := true
-LZMA_RAMDISK_TARGETS := boot,recovery
+#LZMA_RAMDISK_TARGETS := boot,recovery
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
