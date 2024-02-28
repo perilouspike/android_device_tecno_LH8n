@@ -110,9 +110,7 @@ BOARD_MAIN_PARTITION_LIST := \
     vendor \
     vendor_dlkm \
     odm \
-    odm_dlkm \
-    mi_ext \
-    system_dlkm
+    odm_dlkm
 
 BOARD_PARTITION_LIST := $(call to-upper, $(BOARD_MAIN_PARTITION_LIST))
 $(foreach p, $(BOARD_PARTITION_LIST), $(eval BOARD_$(p)IMAGE_FILE_SYSTEM_TYPE := erofs))
