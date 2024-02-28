@@ -1,6 +1,6 @@
-# Copyright (C) 2023 The Android Open Source Project
-# Copyright (C) 2023 TeamWin Recovery Project
-# Copyright (C) 2023 SebaUbuntu's TWRP device tree generator
+# Copyright (C) 2024 The Android Open Source Project
+# Copyright (C) 2024 TeamWin Recovery Project
+# Copyright (C) 2024 SebaUbuntu's TWRP device tree generator
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_coful.mk
+    $(LOCAL_DIR)/twrp_duchamp.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_coful-eng
+    twrp_duchamp-eng

@@ -1,16 +1,18 @@
-ro.hardware=mt6768
-ro.vendor.mediatek.platform=MT6768
+# Dynamic Partitions
+ro.boot.dynamic_partitions=true
+
+# Fstab
+ro.postinstall.fstab.prefix=/system
+
+# USB MTP
 ro.sys.usb.storage.type=mtp
-#ro.hardware.kmsetkey=trustonic
-ro.hardware.gatekeeper=trustonic
-#ro.vendor.mtk_tee_gp_support=1
-ro.vendor.mtk_trustonic_tee_support=1
+
+# Crypto
 ro.crypto.volume.filenames_mode=aes-256-cts
-ro.crypto.uses_fs_ioc_add_encryption_key=true
-ro.crypto.metadata.enabled=true
-#ro.sys.usb.bicr=no
-#ro.sys.usb.charging.only=yes
-ro.sys.usb.mtp.whql.enable=0
-sys.usb.controller=musb-hdrc
-persist.sys.isUsbOtgEnabled=true
-ro.treble.enabled=true
+
+# TEE
+ro.vendor.mtk_tee_gp_support=1
+ro.vendor.mtk_mitee_support=1
+
+# Misc
+ro.vendor.mediatek.platform=MT6897
