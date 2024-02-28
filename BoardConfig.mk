@@ -67,7 +67,7 @@ BOARD_USES_MTK_HARDWARE := true
 MTK_HARDWARE := true
 
 # Kernel
-BOARD_RAMDISK_USE_LZ4 := true
+#BOARD_RAMDISK_USE_LZ4 := true
 TARGET_KERNEL_ARCH := $(TARGET_ARCH)
 TARGET_KERNEL_HEADER_ARCH := $(TARGET_ARCH)
 BOARD_PAGE_SIZE := 4096
@@ -80,7 +80,7 @@ BOARD_HEADER_SIZE := 2128
 BOARD_DTB_SIZE := 396043
 BOARD_DTB_OFFSET := 0x07c88000
 
-BOARD_VENDOR_CMDLINE := "bootopt=64S3,32N2,64N2 androidboot.selinux=permissive"
+BOARD_VENDOR_CMDLINE := "bootopt=64S3,32N2,64N2"
 BOARD_VENDOR_CMDLINE += "androidboot.force_normal_boot=1"
 #BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery  # TODO: Used in other device tree. Do we need it?
 
@@ -176,7 +176,7 @@ TARGET_SCREEN_HEIGHT := 2712
 TARGET_SCREEN_WIDTH := 1220
 
 # Treble
-BOARD_VNDK_VERSION := current
+#BOARD_VNDK_VERSION := current
 
 #################################
 # TWRP - specific Configuration #
