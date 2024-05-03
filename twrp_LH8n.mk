@@ -25,13 +25,16 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 # Inherit from TECNO-LH8n device
 $(call inherit-product, device/tecno/LH8n/device.mk)
 
-PRODUCT_DEVICE := TECNO-LH8n
+# Device Target Name
+PRODUCT_RELEASE_NAME := LH8n
+
+PRODUCT_DEVICE := LH8n
 PRODUCT_NAME := twrp_LH8n
-PRODUCT_BRAND := TECNO
-PRODUCT_MODEL := TECNO LH8n
+PRODUCT_BRAND := Tecno
+PRODUCT_MODEL := LH8n
 PRODUCT_MANUFACTURER := tecno
 
-PRODUCT_GMS_CLIENTID_BASE := android-tecno
+PRODUCT_GMS_CLIENTID_BASE := android-$(PRODUCT_RRAND)
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="vnd_lh8n_h333-user 12 SP1A.210812.016 543533 release-keys"
