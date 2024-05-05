@@ -16,6 +16,32 @@
 #
 
 LOCAL_PATH := device/tecno/LH8n
+
+# Dynamic Partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# API
+PRODUCT_SHIPPING_API_LEVEL := 33
+PRODUCT_TARGET_VNDK_VERSION := 31
+
+# Virtual A/B OTA
+AB_OTA_UPDATER := true
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+
+ENABLE_VIRTUAL_AB := true
+AB_OTA_PARTITIONS += \
+    boot \
+    dtbo \
+    lk \
+    odm \
+    odm_dlkm \
+    product \
+    system \
+    system_ext \
+    vbmeta_system \
+    vbmeta_vendor \
+    vendor
+
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -23,23 +49,31 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 
+# Fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    fastbootd
+
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
+    android.hardware.boot@1.2-mtkimpl \
+    android.hardware.boot@1.2-mtkimpl.recovery
 
+# Health Hal
 PRODUCT_PACKAGES += \
-    bootctrl.mt6833
-
-PRODUCT_PACKAGES += \
-    bootctrl.mt6833 \
-    libgptutils \
-    libz \
-    libcutils
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service       
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh \
+
+# Update engine    
     update_engine \
     update_verifier \
     update_engine_sideload
+
+# MTK plpath utils
+PRODUCT_PACKAGES += \
+    mtk_plpath_utils \
+    mtk_plpath_utils.recovery

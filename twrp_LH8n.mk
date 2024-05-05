@@ -25,6 +25,9 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 # Inherit from TECNO-LH8n device
 $(call inherit-product, device/tecno/LH8n/device.mk)
 
+# Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+
 # Device Target Name
 PRODUCT_RELEASE_NAME := LH8n
 

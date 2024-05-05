@@ -28,17 +28,6 @@ SOONG_ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_ENFORCE_SYSPROP_OWNER := true
 BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
 
-# A/B
-AB_OTA_UPDATER := true
-AB_OTA_PARTITIONS += \
-    vendor \
-    system \
-    boot \
-    vbmeta_system \
-    product \
-    vbmeta_vendor \
-    system_ext
-
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -60,7 +49,7 @@ TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
 
 # APEX
-DEXPREOPT_GENERATE_APEX_IMAGE := true
+#DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := LH8n
@@ -75,7 +64,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
 # Display
-TARGET_SCREEN_DENSITY := 480
+#TARGET_SCREEN_DENSITY := 480
 
 # Kernel
 TARGET_KERNEL_ARCH := $(TARGET_ARCH)
@@ -114,6 +103,7 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := erofs
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
 
 # Dynamic Partition
 BOARD_SUPER_PARTITION_GROUPS := main
@@ -124,8 +114,9 @@ BOARD_MAIN_PARTITION_LIST := \
     product \
     vendor
 
-# Workaround for error copying vendor files to recovery ramdisk
+# Workaround for error copying vendor/product files to recovery ramdisk
 TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_PRODUCT := product
 
 # System as root
 BOARD_SUPPRESS_SECURE_ERASE := true
@@ -141,9 +132,26 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # Fstab Path
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
+TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
+BOARD_AVB_VBMETA_SYSTEM := system system_ext
+BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
+
+BOARD_AVB_VBMETA_VENDOR := vendor product
+BOARD_AVB_VBMETA_VENDOR_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_VBMETA_VENDOR_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := 2
+
+BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 3
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
 # Hack: prevent anti rollback
@@ -153,13 +161,44 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
-TW_EXTRA_LANGUAGES := true
+#TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_NO_SCREEN_BLANK := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
-TW_INCLUDE_REPACKTOOLS := true
 TW_LOAD_VENDOR_MODULES := true
+TW_FRAMERATE := 60
+TW_PREPARE_DATA_MEDIA_EARLY := true
+TW_INCLUDE_FASTBOOTD := true
+TW_HAS_NO_RECOVERY_PARTITION := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+
+# Include binaries
+TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_REPACKTOOLS := true
+
+# Excludes
+TW_EXCLUDE_TWRP_APP := true
+TW_EXCLUDE_APEX := true
+TW_EXCLUDE_SUPERSU := true
+TW_BACKUP_EXCLUSIONS := /data/fonts \
+                        /data/nandswap
+
+# Set brightness path and level
+TW_MAX_BRIGHTNESS := 1000
+TW_DEFAULT_BRIGHTNESS := 500
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"                        
+
+# Disable the Battery/CPU Temperature percentage for devices where it doesn't work properly
+TW_NO_BATT_PERCENT := true
+TW_NO_CPU_TEMP := true
+
+# Prevent TWRP from unmounting /system
+TW_NEVER_UNMOUNT_SYSTEM := true
+
+# On some device, TWRP backup folder name will show 0000000000 bcos cpuinfo has no serial number. Using this flag then it will use ro.product.model as the folder name instead of all 0000000000
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 
 # Debug
 TWRP_INCLUDE_LOGCAT := true
@@ -167,4 +206,3 @@ TARGET_USES_LOGD := true
 
 # Maintainer/Version
 TW_DEVICE_VERSION := perilouspike
-
